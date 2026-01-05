@@ -1,0 +1,49 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("bank_marketing.csv")
+
+# ---------- 1. Line Chart: Average balance per month ----------
+month_order = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
+df["month"] = pd.Categorical(df["month"], categories=month_order, ordered=True)
+monthly_balance = df.groupby("month")["balance"].mean()
+
+plt.figure()
+monthly_balance.plot()
+plt.title("Average Balance Trend by Month")
+plt.xlabel("Month")
+plt.ylabel("Average Balance")
+plt.savefig("line_month_balance.png")
+plt.close()
+
+# ---------- 2. Bar Chart: Average balance by job ----------
+job_balance = df.groupby("job")["balance"].mean()
+
+plt.figure()
+job_balance.plot(kind="bar")
+plt.title("Average Balance by Job")
+plt.xlabel("Job")
+plt.ylabel("Average Balance")
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig("bar_job_balance.png")
+plt.close()
+
+# ---------- 3. Histogram: Age distribution ----------
+plt.figure()
+df["age"].plot(kind="hist")
+plt.title("Distribution of Age")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.savefig("hist_age.png")
+plt.close()
+
+# ---------- 4. Scatter Plot: Balance vs Call Duration ----------
+plt.figure()
+plt.scatter(df["balance"], df["duration"])
+plt.title("Balance vs Call Duration")
+plt.xlabel("Balance")
+plt.ylabel("Duration")
+plt.savefig("scatter_balance_duration.png")
+plt.close()
+
+print("All charts created successfully!")
