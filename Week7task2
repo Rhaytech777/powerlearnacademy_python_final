@@ -1,0 +1,9 @@
+import pandas as pd
+df = pd.read_csv("bank_marketing.csv")
+# Basic statistics
+stats = df.describe()
+# print(stats)
+# Only mean Media Mode Std for numeric columns
+numeric_df = df.select_dtypes(include="number")
+summary = numeric_df.agg(['mean', 'median', 'std'])
+print(summary)
