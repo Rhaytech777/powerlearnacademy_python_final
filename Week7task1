@@ -1,0 +1,13 @@
+import pandas as pd
+df = pd.read_csv("bank_marketing.csv")
+# Display the First Few Rows
+print(df.head())
+# Explore the Structure of the Dataset by checking for null values
+print(df.info())
+# Check the shape (rows, columns)
+print(df.shape)
+# Check for missing values
+print("Missing values BEFORE cleaning:")
+# Verify no missing values remain
+print("\nMissing values AFTER cleaning:")
+print(df.isnull().sum())
